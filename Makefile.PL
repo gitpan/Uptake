@@ -21,15 +21,37 @@ my %WriteMakefileArgs = (
   ],
   "LICENSE" => "perl",
   "NAME" => "Uptake",
-  "PREREQ_PM" => {},
-  "VERSION" => "0.1.1",
+  "PREREQ_PM" => {
+    "App::Cmd::Setup" => 0,
+    "Carp" => 0,
+    "Class::Tiny" => 0,
+    "File::chdir" => 0,
+    "List::Util" => 0,
+    "Mojo::UserAgent" => 0,
+    "autodie" => 0,
+    "feature" => 0,
+    "strict" => 0,
+    "warnings" => 0
+  },
+  "VERSION" => "0.1.2",
   "test" => {
     "TESTS" => ""
   }
 );
 
 
-my %FallbackPrereqs = ();
+my %FallbackPrereqs = (
+  "App::Cmd::Setup" => 0,
+  "Carp" => 0,
+  "Class::Tiny" => 0,
+  "File::chdir" => 0,
+  "List::Util" => 0,
+  "Mojo::UserAgent" => 0,
+  "autodie" => 0,
+  "feature" => 0,
+  "strict" => 0,
+  "warnings" => 0
+);
 
 
 unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
