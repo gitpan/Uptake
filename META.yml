@@ -1,5 +1,5 @@
 ---
-abstract: 'turns baubles into trinkets'
+abstract: 'Download kernels from http://kernel.ubuntu.com/~kernel-ppa/mainline/.'
 author:
   - 'Kai-Heng Feng <khfeng@cpan.org>'
 build_requires: {}
@@ -12,4 +12,4 @@ meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: '1.4'
 name: Uptake
-version: '0.1'
+version: 0.1.1

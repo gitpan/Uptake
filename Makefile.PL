@@ -10,7 +10,7 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "turns baubles into trinkets",
+  "ABSTRACT" => "Download kernels from http://kernel.ubuntu.com/~kernel-ppa/mainline/.",
   "AUTHOR" => "Kai-Heng Feng <khfeng\@cpan.org>",
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
@@ -22,7 +22,7 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Uptake",
   "PREREQ_PM" => {},
-  "VERSION" => "0.1",
+  "VERSION" => "0.1.1",
   "test" => {
     "TESTS" => ""
   }
