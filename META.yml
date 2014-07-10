@@ -6,7 +6,7 @@ build_requires: {}
 configure_requires:
   ExtUtils::MakeMaker: '6.30'
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 5.019, CPAN::Meta::Converter version 2.141520'
+generated_by: 'Dist::Zilla version 5.019, CPAN::Meta::Converter version 2.140640'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -15,7 +15,6 @@ name: Uptake
 requires:
   App::Cmd::Setup: '0'
   Carp: '0'
-  Class::Tiny: '0'
   File::chdir: '0'
   List::Util: '0'
   Mojo::UserAgent: '0'
@@ -23,4 +22,4 @@ requires:
   feature: '0'
   strict: '0'
   warnings: '0'
-version: 0.1.2
+version: 0.1.3

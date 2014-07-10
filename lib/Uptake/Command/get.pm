@@ -12,30 +12,28 @@ use File::chdir;
 use List::Util qw(none);
 use Mojo::UserAgent;
 
-use Class::Tiny {
-    ua => Mojo::UserAgent->new,
-    url => 'http://kernel.ubuntu.com/~kernel-ppa/mainline/',
-    path => "$ENV{HOME}/.cache/kernels",
-};
-
 $ENV{MOJO_MAX_MESSAGE_SIZE} = 0;
+
+my $path = "$ENV{HOME}/.cache/kernels";
+my $ua = Mojo::UserAgent->new;
+my $url = 'http://kernel.ubuntu.com/~kernel-ppa/mainline/';
 
 sub execute {
     my ($self, $opt, $args) = @_;
 
-    $self->{path} = delete $opt->{dir} if $opt->dir;
-    mkdir $self->path unless -d $self->path;
+    $path = delete $opt->{dir} if $opt->dir;
+    mkdir $path unless -d $path;
 
     @ARGV = @$args == 0 ? () : @$args;
 
-    local $CWD = $self->path;
+    local $CWD = $path;
     while (<>) {
         chomp;
         mkdir $_ unless -d $_;
         local $CWD = $_;
 
         $self->_download({
-                url => $self->url . $_ . '/',
+                url => $url . $_ . '/',
                 no => $opt->{no},
                 suffix => '[.]deb$',
             })
@@ -55,7 +53,7 @@ sub _download {
     exists $args->{suffix} or confess;
 
     my @debs;
-    $self->ua->get(
+    $ua->get(
         $args->{url} => {DNT => 1})->res->dom('tr > td > a')->each(sub {
             push @debs, $_->text if $_->text =~ /$args->{suffix}/;
         });
@@ -67,7 +65,7 @@ sub _download {
 
     for (@debs) {
         say 'Downloading ' . $_;
-        $self->ua->get($args->{url} . $_)
+        $ua->get($args->{url} . $_)
         ->res->content->asset->move_to($CWD . '/' . $_);
     }
 }

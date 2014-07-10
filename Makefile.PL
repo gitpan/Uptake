@@ -24,7 +24,6 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "App::Cmd::Setup" => 0,
     "Carp" => 0,
-    "Class::Tiny" => 0,
     "File::chdir" => 0,
     "List::Util" => 0,
     "Mojo::UserAgent" => 0,
@@ -33,7 +32,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.1.2",
+  "VERSION" => "0.1.3",
   "test" => {
     "TESTS" => ""
   }
@@ -43,7 +42,6 @@ my %WriteMakefileArgs = (
 my %FallbackPrereqs = (
   "App::Cmd::Setup" => 0,
   "Carp" => 0,
-  "Class::Tiny" => 0,
   "File::chdir" => 0,
   "List::Util" => 0,
   "Mojo::UserAgent" => 0,

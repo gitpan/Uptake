@@ -11,20 +11,17 @@ use Carp;
 use List::Util qw(none);
 use Mojo::UserAgent;
 
-use Class::Tiny {
-    ua => Mojo::UserAgent->new,
-    url => 'http://kernel.ubuntu.com/~kernel-ppa/mainline/',
-    exclude => [
-        'Parent Directory',
-        'daily',
-        'testing',
-        'fixes',
-        'next',
-        'nightly',
-        'queue',
-        'review',
-    ],
-};
+my $exclude = [
+    'Parent Directory',
+    'daily',
+    'testing',
+    'fixes',
+    'next',
+    'nightly',
+    'queue',
+    'review'];
+my $ua = Mojo::UserAgent->new;
+my $url = 'http://kernel.ubuntu.com/~kernel-ppa/mainline/';
 
 sub execute {
     my ($self, $opt, $args) = @_;
@@ -32,12 +29,12 @@ sub execute {
     my $regex = delete $opt->{regex};
 
     if (my $no = delete $opt->{no}) {
-        push @{$self->exclude}, $_ for @$no;
+        push @$exclude, $_ for @$no;
     }
 
     my @versions;
-    $self->ua->get(
-        $self->url => {DNT => 1})->res->dom('tr > td > a')->each(sub {
+    $ua->get(
+        $url => {DNT => 1})->res->dom('tr > td > a')->each(sub {
             push @versions, $_->text;
         });
 
@@ -45,7 +42,7 @@ sub execute {
     map { s/\///r }
     grep {
         my $val = $_;
-        none { $val =~ /$_/ } @{$self->exclude} } @versions;
+        none { $val =~ /$_/ } @$exclude } @versions;
 
     @versions = grep { /$regex/ } @versions if $regex;
 
